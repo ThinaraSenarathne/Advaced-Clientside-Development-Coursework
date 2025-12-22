@@ -12,6 +12,8 @@ function SearchPage() {
     maxBedrooms: '',
     postcode: '',
   })
+
+  const [results , setResults] = useState(data.properties)
   
   const handleChange = (e) => {
     const {name , value} = e.target
@@ -19,6 +21,42 @@ function SearchPage() {
         ...filters,
         [name]: value
     })
+  }
+
+  const handleSearch = () => {
+    const filtered = data.properties.filter((property) => {
+
+        if (filters.type && property.type !== filters.type) {
+            return false
+        }
+
+        if (filters.minPrice && property.price < Numbers (filters.minPrice)) {
+            return false
+        }
+
+        if (filters.maxPrice && property.price > Numbers (filters.maxPrice)) {
+            return false
+        }
+
+        if (filters.minBedrooms && property.bedrooms < Numbers (filters.minBedrooms)) {
+            return false
+        }
+
+        if (filters.maxBedrooms && property.bedrooms > Numbers (filters.maxBedrooms)) {
+            return false
+        }
+
+        if (
+            filters.postcode &&
+            !property.postcode.toUpperCase().satartsWith(filters.postcode.toUpperCase())
+        ) {
+            return false
+        }
+
+        return true
+    })
+
+    setResults(filtered)
   }
 
   return (
@@ -67,7 +105,7 @@ function SearchPage() {
                     <input type = "text" name = "postcode" value = {filters.postcode} onChange = {handleChange} placeholder = "e.g. NW1"/>
                 </div>
 
-                <button type="button">Search</button>
+                <button type="button" onClick = {handleSearch}> Search </button>
             </form>
         </TabPanel>
 
@@ -75,6 +113,20 @@ function SearchPage() {
             <p>No favourites added yet.</p>
         </TabPanel>
       </Tabs>
+
+      <div>
+        <h2>Results</h2>
+
+        {results.length === 0 && <p>No properties found.</p>}
+
+        <ul>
+            {results.map((property) => 
+                <li key = {property.id}>
+                    {property.type} – £{property.price} – {property.bedrooms} bedrooms
+                </li>
+            )}
+        </ul>
+      </div>
 
       <p style = {{marginTop: '20px'}}>
         Total properties loaded: {data.properties.length}

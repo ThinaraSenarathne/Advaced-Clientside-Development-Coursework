@@ -1,8 +1,26 @@
+import {useState} from 'react'
 import {Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 import data from '../data/properties(1).json'
 
 function SearchPage() {
+  const[filters, setFilters] = useState({
+    type: '',
+    minPrice: '',
+    maxPrice: '',
+    minBedrooms: '',
+    maxBedrooms: '',
+    postcode: '',
+  })
+  
+  const handleChange = (e) => {
+    const {name , value} = e.target
+    setFilters({
+        ...filters,
+        [name]: value
+    })
+  }
+
   return (
     <div style = {{padding: '20px'}}>
       <h1>Property Search</h1>
@@ -10,14 +28,14 @@ function SearchPage() {
       <Tabs>
         <TabList>
             <Tab>Search Filters</Tab>
-            <Tab>Favourittes</Tab>
+            <Tab>Favourites</Tab>
         </TabList>
 
         <TabPanel>
             <form>
                 <div>
                     <label>Property Type</label>
-                    <select>
+                    <select name = "type" value = {filters.type} onChange = {handleChange}>
                         <option value = "">Any</option>
                         <option value = "House">House</option>
                         <option value = "Flat">Flat</option>
@@ -26,27 +44,27 @@ function SearchPage() {
 
                 <div>
                     <label>Min Price</label>
-                    <input type = "number" placeholder = "Min price"/>
+                    <input type = "number" name = "minPrice" value = {filters.minPrice} onChange = {handleChange} placeholder = "Min price"/>
                 </div>
 
                 <div>
-                    <label>Min Price</label>
-                    <input type = "number" placeholder = "Max price"/>
+                    <label>Max Price</label>
+                    <input type = "number" name = "maxPrice" value = {filters.maxPrice} onChange = {handleChange} placeholder = "Max price"/>
                 </div>
 
                 <div>
                     <label>Min Bedrooms</label>
-                    <input type = "number"/>
+                    <input type = "number" name = "minBedrooms" value = {filters.minBedrooms} onChange = {handleChange}/>
                 </div>
 
                 <div>
                     <label>Max Bedrooms</label>
-                    <input type = "number"/>
+                    <input type = "number" name = "maxBedrooms" value= {filters.maxBedrooms} onChange = {handleChange}/>
                 </div>
 
                 <div>
                     <label>Postcode Area</label>
-                    <input type = "text" placeholder = "e.g. NW1"/>
+                    <input type = "text" name = "postcode" value = {filters.postcode} onChange = {handleChange} placeholder = "e.g. NW1"/>
                 </div>
 
                 <button type="button">Search</button>

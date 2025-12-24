@@ -30,25 +30,25 @@ function SearchPage() {
             return false
         }
 
-        if (filters.minPrice && property.price < Numbers (filters.minPrice)) {
+        if (filters.minPrice && property.price < Number (filters.minPrice)) {
             return false
         }
 
-        if (filters.maxPrice && property.price > Numbers (filters.maxPrice)) {
+        if (filters.maxPrice && property.price > Number (filters.maxPrice)) {
             return false
         }
 
-        if (filters.minBedrooms && property.bedrooms < Numbers (filters.minBedrooms)) {
+        if (filters.minBedrooms && property.bedrooms < Number (filters.minBedrooms)) {
             return false
         }
 
-        if (filters.maxBedrooms && property.bedrooms > Numbers (filters.maxBedrooms)) {
+        if (filters.maxBedrooms && property.bedrooms > Number (filters.maxBedrooms)) {
             return false
         }
 
         if (
             filters.postcode &&
-            !property.postcode.toUpperCase().satartsWith(filters.postcode.toUpperCase())
+            !property.postcode.toUpperCase().startsWith(filters.postcode.toUpperCase())
         ) {
             return false
         }
@@ -114,18 +114,44 @@ function SearchPage() {
         </TabPanel>
       </Tabs>
 
-      <div>
+      <div style = {{marginTop : '30px'}}>
         <h2>Results</h2>
 
         {results.length === 0 && <p>No properties found.</p>}
 
-        <ul>
-            {results.map((property) => 
-                <li key = {property.id}>
-                    {property.type} – £{property.price} – {property.bedrooms} bedrooms
-                </li>
-            )}
-        </ul>
+        <div style = {{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+            gap: '20px'
+        }}>
+            {results.map((property) => (
+                <div 
+                    key = {property.id}
+                    style = {{
+                        border: '1px solid #ccc',
+                        borderRadius: '8px',
+                        padding: '10px'
+                    }}
+                >
+                    <img
+                        src = {property.picture[0]}
+                        alt = {property.type}
+                        style = {{
+                            width: '100%',
+                            height: '150px',
+                            objectFit: 'cover'
+                        }} 
+                    />
+
+                    <h3>{property.type}</h3>
+                    <p>£{property.price.toLocaleString()}</p>
+                    <p>{property.bedrooms} bedrooms</p>
+                    <p>{property.postcode}</p>
+
+                    <a href = {`/property/${property.id}`}>View details</a>
+                </div>
+            ))}
+        </div>
       </div>
 
       <p style = {{marginTop: '20px'}}>

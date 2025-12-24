@@ -1,6 +1,8 @@
 import { useParams } from 'react-router-dom'
 import data from '../data/properties(1).json'
 import { useState } from 'react'
+import {Tab, Tabs, TabList, TabPanel} from 'react-tabs'
+import 'react-tabs/style/react-tabs.css'
 
 function PropertyPage() {
   const { id } = useParams()
@@ -47,6 +49,39 @@ function PropertyPage() {
           />
         ))}
       </div>
+
+      <Tabs style={{ marginTop: '30px' }}>
+        <TabList>
+          <Tab>Description</Tab>
+          <Tab>Floor Plan</Tab>
+          <Tab>Map</Tab>
+        </TabList>
+
+        <TabPanel>
+          <p>{property.description}</p>
+        </TabPanel>
+
+        <TabPanel>
+          <img
+            src={`/${property.picture[0]}`}
+            alt="Floor plan"
+            style={{ width: '100%', maxWidth: '600px' }}
+          />
+        </TabPanel>
+
+        <TabPanel>
+          <iframe
+            title="Google Map"
+            width="100%"
+            height="300"
+            style={{ border: 0 }}
+            loading="lazy"
+            allowFullScreen
+            src={`https://www.google.com/maps?q=${encodeURIComponent(property.location)}&output=embed`}
+          />
+        </TabPanel>
+      </Tabs>
+
 
     </div>
   )

@@ -81,27 +81,27 @@ function SearchPage({favourites}) {
                 </div>
 
                 <div>
-                    <label>Min Price</label>
+                    <label htmlFor='minPrice'>Min Price</label>
                     <input type = "number" name = "minPrice" value = {filters.minPrice} onChange = {handleChange} placeholder = "Min price"/>
                 </div>
 
                 <div>
-                    <label>Max Price</label>
+                    <label htmlFor='maxPrice'>Max Price</label>
                     <input type = "number" name = "maxPrice" value = {filters.maxPrice} onChange = {handleChange} placeholder = "Max price"/>
                 </div>
 
                 <div>
-                    <label>Min Bedrooms</label>
+                    <label htmlFor='minBedrooms'>Min Bedrooms</label>
                     <input type = "number" name = "minBedrooms" value = {filters.minBedrooms} onChange = {handleChange}/>
                 </div>
 
                 <div>
-                    <label>Max Bedrooms</label>
+                    <label htmlFor='maxBedrooms'>Max Bedrooms</label>
                     <input type = "number" name = "maxBedrooms" value= {filters.maxBedrooms} onChange = {handleChange}/>
                 </div>
 
                 <div>
-                    <label>Postcode Area</label>
+                    <label htmlFor='postcode'>Postcode Area</label>
                     <input type = "text" name = "postcode" value = {filters.postcode} onChange = {handleChange} placeholder = "e.g. NW1"/>
                 </div>
 
@@ -109,9 +109,7 @@ function SearchPage({favourites}) {
             </form>
         </TabPanel>
 
-        <TabPanel>
-            
-        </TabPanel>
+    
       </Tabs>
 
       <div style = {{marginTop : '30px'}}>

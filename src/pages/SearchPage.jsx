@@ -3,7 +3,7 @@ import {Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 import data from '../data/properties(1).json'
 
-function SearchPage() {
+function SearchPage({favourites}) {
   const[filters, setFilters] = useState({
     type: '',
     minPrice: '',
@@ -110,7 +110,7 @@ function SearchPage() {
         </TabPanel>
 
         <TabPanel>
-            <p>No favourites added yet.</p>
+            
         </TabPanel>
       </Tabs>
 

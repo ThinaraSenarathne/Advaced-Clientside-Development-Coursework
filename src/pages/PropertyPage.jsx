@@ -4,11 +4,17 @@ import { useState } from 'react'
 import {Tab, Tabs, TabList, TabPanel} from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 
-function PropertyPage() {
+function PropertyPage({ favourites, setFavourites }) {
   const { id } = useParams()
   const property = data.properties.find(p => p.id === id)
   const [mainImage, setMainImage] = useState(property.picture[0])
+  const isFavourite = favourites.some(fav => fav.id === property.id)
 
+  const addToFavourites = () => {
+    if (!isFavourite) {
+      setFavourites([...favourites, property])
+    }
+  }
 
   if (!property) {
     return <p>Property not found</p>
@@ -19,6 +25,23 @@ function PropertyPage() {
       <h1>{property.type}</h1>
       <p>£{property.price.toLocaleString()}</p>
       <p>{property.bedrooms} bedrooms</p>
+      
+      <button
+        onClick={addToFavourites}
+        disabled={isFavourite}
+        style={{
+          padding: '10px 10px',
+          marginBottom: '20px',
+          backgroundColor: isFavourite ? '#ccc' : '007bff',
+          color: '#fff',
+          border: 'none',
+          borderRadius: '5px',
+          cursor: isFavourite ? 'not-allowed' : 'pointed'
+        }}
+      >
+        {isFavourite ? 'Added to favourites' : 'Add to Favourites'}
+      </button>
+
       <p>{property.description}</p>
 
       <img

@@ -3,7 +3,10 @@ import {Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
 import data from '../data/properties(1).json'
 
+
 function SearchPage({favourites}) {
+  const [sortBy, setSortBy] = useState('')
+  
   const[filters, setFilters] = useState({
     type: '',
     minPrice: '',
@@ -11,6 +14,8 @@ function SearchPage({favourites}) {
     minBedrooms: '',
     maxBedrooms: '',
     postcode: '',
+    dateFrom: '',
+    dateTo: ''
   })
 
   const [results , setResults] = useState(data.properties)
@@ -22,6 +27,7 @@ function SearchPage({favourites}) {
         [name]: value
     })
   }
+
 
   const handleSearch = () => {
     const filtered = data.properties.filter((property) => {
@@ -48,15 +54,48 @@ function SearchPage({favourites}) {
 
         if (
             filters.postcode &&
-            !property.postcode.toUpperCase().startsWith(filters.postcode.toUpperCase())
+            !property.location.toUpperCase().includes(filters.postcode.toUpperCase())
         ) {
             return false
+        }
+
+        const propertyDate = new Date(
+            `${property.added.month} ${property.added.day}, ${property.added.year}`
+        )
+
+        if (filters.dateForm) {
+            const fromDate = new Date(filters.dateForm)
+            if (propertyDate < formDate){
+                return false
+            } 
+        }
+
+        if (filters.dateTo) {
+            const toDate = new Date(filters.dateTo)
+            if (propertyDate > toDate) {
+                return false
+            }
         }
 
         return true
     })
 
+    let sorted = [...filtered]
+
+    if (sortBy === 'priceAsc') {
+        filtered.sort((a, b) => a.price - b.price)
+    }
+
+    if (sortBy === 'priceDesc') {
+        filtered.sort((a, b) => b.price - a.price)
+    }
+
+    if (sortBy === 'bedrooms') {
+        filtered.sort((a, b) => b.bedrooms - a.bedrooms)
+    }
+
     setResults(filtered)
+
   }
 
   return (
@@ -105,6 +144,26 @@ function SearchPage({favourites}) {
                     <input type = "text" name = "postcode" value = {filters.postcode} onChange = {handleChange} placeholder = "e.g. NW1"/>
                 </div>
 
+                <div>
+                    <label>Aded After</label>
+                    <input type="date" name="dateFrom" value={filters.dateFrom} onChange={handleChange}/>
+                </div>
+
+                <div>
+                    <label>Aded Before</label>
+                    <input type="date" name="dateFrom" value={filters.dateFrom} onChange={handleChange}/>
+                </div>
+
+                <div>
+                    <label>Sort By</label>
+                    <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+                        <option value="">None</option>
+                        <option value="priceAsc">Price: Low to High</option>
+                        <option value="priceDesc">Price: High to Low</option>
+                        <option value="bedrooms">Bedrooms</option>
+                    </select>
+                </div>
+
                 <button type="button" onClick = {handleSearch}> Search </button>
             </form>
         </TabPanel>
@@ -113,7 +172,7 @@ function SearchPage({favourites}) {
       </Tabs>
 
       <div style = {{marginTop : '30px'}}>
-        <h2>Results</h2>
+        <h2>Results({results.length})</h2>
 
         {results.length === 0 && <p>No properties found.</p>}
 

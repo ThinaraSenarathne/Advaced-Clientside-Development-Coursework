@@ -32,11 +32,11 @@ function PropertyPage({ favourites, setFavourites }) {
         style={{
           padding: '10px 10px',
           marginBottom: '20px',
-          backgroundColor: isFavourite ? '#ccc' : '007bff',
+          backgroundColor: isFavourite ? '#ccc' : '#007bff',
           color: '#fff',
           border: 'none',
           borderRadius: '5px',
-          cursor: isFavourite ? 'not-allowed' : 'pointed'
+          cursor: isFavourite ? 'not-allowed' : 'pointer'
         }}
       >
         {isFavourite ? 'Added to favourites' : 'Add to Favourites'}

@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import propertiesData from "../data/properties.json";
+import propertiesData from "../data/properties(1).json";
 import ImageGallery from "../components/ImageGallery";
 import PropertyTabs from "../components/PropertyTabs";
 import "../styles/property.css";

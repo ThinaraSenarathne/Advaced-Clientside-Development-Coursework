@@ -20,3 +20,26 @@
   background: white;
   padding: 10px;
 }
+
+.favourites {
+  background: white;
+  padding: 10px;
+}
+
+.fav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f7f7f7;
+  margin-bottom: 8px;
+  padding: 5px;
+}
+
+.fav-item img {
+  width: 60px;
+}
+
+.clear-btn {
+  margin-top: 10px;
+  width: 100%;
+}

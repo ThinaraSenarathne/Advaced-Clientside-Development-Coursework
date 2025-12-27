@@ -1,5 +1,5 @@
 import { useState } from "react";
-import propertiesData from "../data/properties.json";
+import propertiesData from "../data/properties(1).json";
 import SearchForm from "../components/SearchForm";
 import PropertyList from "../components/PropertyList";
 import Favourites from "../components/Favourites";

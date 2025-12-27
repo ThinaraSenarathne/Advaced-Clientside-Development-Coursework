@@ -63,9 +63,9 @@ function SearchPage({favourites}) {
             `${property.added.month} ${property.added.day}, ${property.added.year}`
         )
 
-        if (filters.dateForm) {
-            const fromDate = new Date(filters.dateForm)
-            if (propertyDate < formDate){
+        if (filters.dateFrom) {
+            const fromDate = new Date(filters.dateFrom)
+            if (propertyDate < fromDate){
                 return false
             } 
         }
@@ -151,7 +151,7 @@ function SearchPage({favourites}) {
 
                 <div>
                     <label>Aded Before</label>
-                    <input type="date" name="dateFrom" value={filters.dateFrom} onChange={handleChange}/>
+                    <input type="date" name="dateTo" value={filters.dateTo} onChange={handleChange}/>
                 </div>
 
                 <div>

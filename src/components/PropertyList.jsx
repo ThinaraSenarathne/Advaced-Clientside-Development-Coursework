@@ -1,4 +1,4 @@
-import PropertyCard from "./PropertyCard";
+import PropertyCard from "./PropertyCard"
 
 export default function PropertyList({ properties, favourites, setFavourites }) {
   return (
@@ -12,5 +12,6 @@ export default function PropertyList({ properties, favourites, setFavourites }) 
         />
       ))}
     </div>
-  );
+  )
 }
+

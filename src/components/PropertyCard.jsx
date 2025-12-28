@@ -12,6 +12,8 @@ export default function PropertyCard({ property, favourites, setFavourites }) {
     }
   }
 
+  const isFavourite = favourites.some(f => f.id === property.id)
+
   return (
     <div 
         className="card"
@@ -24,7 +26,14 @@ export default function PropertyCard({ property, favourites, setFavourites }) {
 
       <Link to={`/property/${property.id}`}>View Details</Link>
       
-      <button onClick={addFavourite}>❤️ Favourite</button>
+      <button 
+        className={isFavourite ? "added" : "not-added"}
+        onClick={addFavourite}
+        disabled={isFavourite}
+       > 
+        {isFavourite ? "✔ Added to favourites" : "❤️ Add to favourites"}
+
+      </button>
     </div>
   )
 }

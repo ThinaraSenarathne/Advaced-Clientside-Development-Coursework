@@ -230,6 +230,30 @@ body {
   border-radius: 4px;
 }
 
+.card button {
+  margin-top: 8px;
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.added {
+  background: #4caf50;
+  color: white;
+  cursor: default;
+}
+
+.not-added {
+  background: #003366;
+  color: white;
+}
+
+.not-added:hover {
+  background: #0055aa;
+}
+
 .fav-btn:hover {
   background: #0055aa;
 }

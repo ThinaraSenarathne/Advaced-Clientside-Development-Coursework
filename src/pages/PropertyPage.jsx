@@ -10,6 +10,8 @@ export default function PropertyPage({ favourites, setFavourites }) {
   const property = data.properties.find(p => p.id === id)
   const [mainImg, setMainImg] = useState(property.picture[0])
 
+  const isFavourite = favourites.some(f => f.id === property.id)
+
   const addFavourite = () => {
     if (!favourites.find(f => f.id === property.id)) {
       setFavourites([...favourites, property])
@@ -54,8 +56,12 @@ export default function PropertyPage({ favourites, setFavourites }) {
             <li><strong>Postcode:</strong> {property.postcode}</li>
           </ul>
 
-          <button className="fav-btn" onClick={addFavourite}>
-            ❤️ Add to favourites
+          <button 
+            className={`fav-btn ${isFavourite ? "added" : "not-added"}`}
+            onClick={addFavourite}
+            disabled={isFavourite}
+          >
+            {isFavourite ? "✔ Added to favourites" : "❤️ Add to favourites"}
           </button>
         </div>
 

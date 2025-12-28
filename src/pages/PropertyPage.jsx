@@ -50,6 +50,7 @@ export default function PropertyPage({ favourites, setFavourites }) {
           />
         </TabPanel>
       </Tabs>
+      
     </div>
   )
 }

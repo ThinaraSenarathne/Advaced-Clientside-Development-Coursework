@@ -11,17 +11,26 @@ export default function PropertyTabs({ property }) {
       </TabList>
 
       <TabPanel>
-        <p>{property.longDescription}</p>
+        <p>{property.description}</p>
       </TabPanel>
 
       <TabPanel>
-        <img src={property.floorPlan} alt="Floor plan" />
+        <img
+            src={`/${property.floorPlan.replace("public/", "")}`}
+            alt="Floor plan"
+        />
       </TabPanel>
 
       <TabPanel>
         <iframe
-          title="map"
-          src={`https://maps.google.com/maps?q=${property.coordinates.lat},${property.coordinates.lng}&output=embed`}
+            title="map"
+            width="100%"
+            height="300"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            src={`https://maps.google.com/maps?q=${encodeURIComponent(
+            property.location || property.postcode
+            )}&output=embed`}
         />
       </TabPanel>
     </Tabs>

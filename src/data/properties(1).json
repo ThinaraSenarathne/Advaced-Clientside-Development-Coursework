@@ -145,7 +145,8 @@
 			"tenure":"Leasehold",
             "shortDescription": "Three bedrooms penthouse apartment located near to shops and mainline stations",
 			"description":"Stylish three bedroom penthouse apartment offering panoramic city views. The property features an open-plan living space, modern kitchen, two bathrooms, private terrace and secure underground parking. Located close to shops and mainline stations.",
-			"location":"Camden Road, London NW1",
+			"postcode":"NW1",
+            "location":"Camden Road, London NW1",
 			"picture":[
                 "public/images/prop6pic1small.jfif",
                 "public/images/prop6pic2small.jfif",

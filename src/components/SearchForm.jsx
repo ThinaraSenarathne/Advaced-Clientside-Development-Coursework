@@ -20,7 +20,7 @@ export default function SearchForm({ onSearch }) {
     <form className="search-form" onSubmit={handleSubmit}>
       <h2>Search Properties</h2>
 
-      <Dropdown data={["any", "house", "flat"]} value={type} onChange={setType} />
+      <Dropdown data={["Any", "House", "Flat"]} value={type} onChange={setType} />
       <input type="number" placeholder="Min Price" onChange={e => setMinPrice(e.target.value)} />
       <input type="number" placeholder="Max Price" onChange={e => setMaxPrice(e.target.value)} />
       <input type="number" placeholder="Min Bedrooms" onChange={e => setMinBeds(e.target.value)} />

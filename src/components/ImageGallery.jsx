@@ -1,11 +1,11 @@
-import Gallery from "react-image-gallery";
+import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 
-export default function ImageGallery({ images }) {
-  const galleryImages = images.map(img => ({
-    original: img,
-    thumbnail: img
+export default function PropertyImageGallery({ images }) {
+  const galleryImages = images.map(pic => ({
+    original: `/${pic.replace("public/", "")}`,
+    thumbnail: `/${pic.replace("public/", "")}`
   }));
 
-  return <Gallery items={galleryImages} />;
+  return <ImageGallery items={galleryImages} />;
 }

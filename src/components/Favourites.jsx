@@ -37,7 +37,7 @@ export default function Favourites({ favourites, setFavourites }) {
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                     >
-                      <img src={fav.picture[0]} alt="" />
+                      <img src={`/${fav.picture[0].replace("public/", "")}`} alt="" />
                       <p>£{fav.price.toLocaleString()}</p>
                       <button onClick={() => removeFavourite(fav.id)}>❌</button>
                     </div>

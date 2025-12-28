@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import propertiesData from "../data/properties(1).json";
-import ImageGallery from "../components/ImageGallery";
+import PropertyImageGallery from "../components/ImageGallery";
 import PropertyTabs from "../components/PropertyTabs";
 import "../styles/property.css";
 
@@ -11,7 +11,7 @@ export default function PropertyPage() {
   return (
     <div className="property-page">
       <h1>£{property.price.toLocaleString()}</h1>
-      <ImageGallery images={property.picture} />
+      <PropertyImageGallery images={property.picture} />
       <PropertyTabs property={property} />
     </div>
   );

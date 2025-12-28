@@ -9,7 +9,7 @@ export default function PropertyCard({ property, favourites, setFavourites }) {
 
   return (
     <div className="card">
-      <img src={property.picture[0]} alt="" />
+      <img src={property.picture[0].replace('public','')} alt="" />
       <h3>£{property.price.toLocaleString()}</h3>
       <p>{property.shortDescription}</p>
       <Link to={`/property/${property.id}`}>View Details</Link>

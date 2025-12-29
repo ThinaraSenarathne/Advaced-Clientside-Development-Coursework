@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-export default function PropertyCard({ property, favourites, setFavourites }) {
+export default function PropertyCard({ property, favourites, setFavourites, }) {
 
   const handleDragStart = (e) => {
     e.dataTransfer.setData("propertyId",property.id)
@@ -25,15 +25,17 @@ export default function PropertyCard({ property, favourites, setFavourites }) {
       <p>{property.shortDescription}</p>
 
       <Link to={`/property/${property.id}`}>View Details</Link>
-      
-      <button 
-        className={isFavourite ? "added" : "not-added"}
-        onClick={addFavourite}
-        disabled={isFavourite}
-       > 
-        {isFavourite ? "✔ Added to favourites" : "❤️ Add to favourites"}
 
-      </button>
+      <div>
+            <button 
+                className={isFavourite ? "added" : "not-added"}
+                onClick={addFavourite}
+                disabled={isFavourite}
+            > 
+                {isFavourite ? "✔ Added to favourites" : "❤️ Add to favourites"}
+
+            </button>
+      </div>  
     </div>
   )
 }

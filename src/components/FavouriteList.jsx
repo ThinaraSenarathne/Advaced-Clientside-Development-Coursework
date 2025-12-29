@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom"
 import propertiesData from "../data/properties(1).json"
+
 
 export default function FavouriteList({ favourites, setFavourites }) {
 
@@ -44,7 +46,8 @@ export default function FavouriteList({ favourites, setFavourites }) {
           onDragStart={(e) => handleDragStart(e, f.id)}
           className="fav-item"
         >
-          {f.shortDescription}
+          <Link to={`/property/${f.id}`} className="fave-l">{f.shortDescription}</Link>
+          
           <button onClick={() => setFavourites(favourites.filter(x => x.id !== f.id))}>
             ❌
           </button>

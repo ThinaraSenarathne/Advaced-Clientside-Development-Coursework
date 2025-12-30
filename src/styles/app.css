@@ -288,4 +288,32 @@ iframe {
     border-left: none;
     border-top: 1px solid #ddd;
   }
+
+  
+  /* Stack results and favourites */
+  .content {
+    grid-template-columns: 1fr;
+  }
+
+  /* Move favourites below results */
+  .favourites {
+    width: 100%;
+    height: auto;
+    position: relative;
+    border-left: none;
+    border-top: 2px dashed #003366;
+    margin-top: 1rem;
+  }
+
+  /* Improve card readability on small screens */
+  .card img {
+    height: 200px;
+  }
+
+  /* Search form spacing */
+  .search-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
 }

@@ -1,29 +1,35 @@
 import { useState } from "react"
+import Select from "react-select"
+import DatePicker from "react-datepicker"
+import Slider from "rc-slider"
+import "react-datepicker/dist/react-datepicker.css"
+import "rc-slider/assets/index.css"
 
 export default function SearchForm({ properties, setResults }) {
-  const [filters, setFilters] = useState({
-    type: "Any",
-    minPrice: "",
-    maxPrice: "",
-    minBed: "",
-    maxBed: "",
-    postcode: "",
-    dateFrom: "",
-    dateTo: ""
-  })
+
+  const [type, setType] = useState(null)
+  const [price, setPrice] = useState([0, 1500000])
+  const [beds, setBeds] = useState([0, 6])
+  const [postcode, setPostcode] = useState("")
+  const [dateFrom, setDateFrom] = useState(null)
+  const [dateTo, setDateTo] = useState(null)
+
+  const typeOptions = [
+    { value: "House", label: "House" },
+    { value: "Flat", label: "Flat" }
+  ]
 
   const handleSearch = () => {
     const filtered = properties.filter(p => {
-      if (filters.type !== "Any" && p.type !== filters.type) return false
-      if (filters.minPrice && p.price < filters.minPrice) return false
-      if (filters.maxPrice && p.price > filters.maxPrice) return false
-      if (filters.minBed && p.bedrooms < filters.minBed) return false
-      if (filters.maxBed && p.bedrooms > filters.maxBed) return false
-      if (filters.postcode && !p.postcode.startsWith(filters.postcode.toUpperCase())) return false
+
+      if (type && p.type !== type.value) return false
+      if (p.price < price[0] || p.price > price[1]) return false
+      if (p.bedrooms < beds[0] || p.bedrooms > beds[1]) return false
+      if (postcode && !p.postcode.startsWith(postcode.toUpperCase())) return false
 
       const propDate = new Date(`${p.added.month} ${p.added.day}, ${p.added.year}`)
-      if (filters.dateFrom && propDate < new Date(filters.dateFrom)) return false
-      if (filters.dateTo && propDate > new Date(filters.dateTo)) return false
+      if (dateFrom && propDate < dateFrom) return false
+      if (dateTo && propDate > dateTo) return false
 
       return true
     })
@@ -35,25 +41,63 @@ export default function SearchForm({ properties, setResults }) {
     <section className="search-form">
       <h2>Search Properties</h2>
 
-      <select onChange={e => setFilters({ ...filters, type: e.target.value })}>
-        <option>Any</option>
-        <option>House</option>
-        <option>Flat</option>
-      </select>
+      {/* PROPERTY TYPE */}
+      <label>Property Type</label>
+      <Select
+        options={typeOptions}
+        isClearable
+        placeholder="Any"
+        onChange={setType}
+      />
 
-      <input placeholder="Min Price" type="number" onChange={e => setFilters({ ...filters, minPrice: e.target.value })} />
-      <input placeholder="Max Price" type="number" onChange={e => setFilters({ ...filters, maxPrice: e.target.value })} />
+      {/* PRICE RANGE */}
+      <label>Price Range (£)</label>
+      <Slider
+        range
+        min={0}
+        max={1500000}
+        step={50000}
+        value={price}
+        onChange={setPrice}
+      />
+      <p>£{price[0].toLocaleString()} – £{price[1].toLocaleString()}</p>
 
-      <input placeholder="Min Bedrooms" type="number" onChange={e => setFilters({ ...filters, minBed: e.target.value })} />
-      <input placeholder="Max Bedrooms" type="number" onChange={e => setFilters({ ...filters, maxBed: e.target.value })} />
+      {/* BEDROOM RANGE */}
+      <label>Bedrooms</label>
+      <Slider
+        range
+        min={0}
+        max={6}
+        value={beds}
+        onChange={setBeds}
+      />
+      <p>{beds[0]} – {beds[1]} bedrooms</p>
 
-      <input placeholder="Postcode Area (e.g. BR1)" onChange={e => setFilters({ ...filters, postcode: e.target.value })} />
+      {/* POSTCODE */}
+      <label>Postcode Area</label>
+      <input
+        placeholder="e.g. BR1"
+        value={postcode}
+        onChange={e => setPostcode(e.target.value)}
+      />
 
-      <label>From Date</label>
-      <input type="date" onChange={e => setFilters({ ...filters, dateFrom: e.target.value })} />
+      {/* DATE FROM */}
+      <label>Date Added From</label>
+      <DatePicker
+        selected={dateFrom}
+        onChange={setDateFrom}
+        dateFormat="dd/MM/yyyy"
+        placeholderText="Select start date"
+      />
 
-      <label>To Date</label>
-      <input type="date" onChange={e => setFilters({ ...filters, dateTo: e.target.value })} />
+      {/* DATE TO */}
+      <label>Date Added To</label>
+      <DatePicker
+        selected={dateTo}
+        onChange={setDateTo}
+        dateFormat="dd/MM/yyyy"
+        placeholderText="Select end date"
+      />
 
       <button onClick={handleSearch}>Search</button>
     </section>

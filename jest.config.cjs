@@ -1,10 +1,17 @@
-// jest.config.cjs
-export default {
-  testEnvironment: 'jsdom',
-  transform: {
-    '^.+\\.jsx?$': 'babel-jest'
+module.exports = {
+  testEnvironment: "jsdom",
+
+  setupFilesAfterEnv: ["<rootDir>/src/setupTests.js"],
+
+  moduleNameMapper: {
+    "\\.(css|less|scss|sass)$": "<rootDir>/src/__mocks__/styleMock.js",
+    "\\.(svg|png|jpg|jpeg|gif)$": "<rootDir>/src/__mocks__/fileMock.js"
   },
-  moduleFileExtensions: ['js', 'jsx'],
-  setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect']
-};
+
+  testPathIgnorePatterns: [
+    "/node_modules/",
+    "src/App.test.js"
+  ]
+}
+
 

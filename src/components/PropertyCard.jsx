@@ -20,7 +20,7 @@ export default function PropertyCard({ property, favourites, setFavourites, }) {
         draggable
         onDragStart={handleDragStart}
     >
-      <img src={`/${property.picture[0]}`} alt={property.shortDescription}/>
+      <img src={property.picture[0]} alt={property.shortDescription}/>
       <h3>£{property.price.toLocaleString()}</h3>
       <p>{property.shortDescription}</p>
 

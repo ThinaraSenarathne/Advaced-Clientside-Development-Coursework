@@ -28,7 +28,7 @@ export default function PropertyPage({ favourites, setFavourites }) {
         <div className="gallery">
           <img
             className="main-img"
-            src={`/${mainImg}`}
+            src={mainImg}
             alt="Property"
           />
 
@@ -36,7 +36,7 @@ export default function PropertyPage({ favourites, setFavourites }) {
             {property.picture.map(img => (
               <img
                 key={img}
-                src={`/${img}`}
+                src={img}
                 alt=""
                 onClick={() => setMainImg(img)}
               />
@@ -80,7 +80,7 @@ export default function PropertyPage({ favourites, setFavourites }) {
           <TabPanel>
             <img
               className="floorplan"
-              src={`/${property.floorPlan}`}
+              src={property.floorPlan}
               alt="Floor Plan"
             />
           </TabPanel>
@@ -88,7 +88,8 @@ export default function PropertyPage({ favourites, setFavourites }) {
           <TabPanel>
             <iframe
               title="map"
-              src={`https://maps.google.com/maps?q=${property.postcode}&output=embed`}
+              src={`https://maps.google.com/maps?q=${encodeURIComponent(property.location)}&output=embed`}
+
             />
           </TabPanel>
         </Tabs>
